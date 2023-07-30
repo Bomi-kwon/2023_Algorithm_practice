@@ -17,8 +17,9 @@ public class Solution {
 	    
 	    Collections.sort(numbers);
 	    
-	    System.out.println(numbers.get((N+1)/2-1));
+	    System.out.println(numbers.get(N/2));
 	    
 	  }
 }
+
 
