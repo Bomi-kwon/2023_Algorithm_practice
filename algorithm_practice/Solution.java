@@ -15,40 +15,36 @@ public class Solution {
 	    }
 	    
 	    // Collections.sort(numbers);
+	    // 아래부터는 예시를 보고 바꾼 더 간결한 선택 정렬 알고리즘
 	    
-	    int maxNum;
-	    int last_index = N-1;
-	    int maxNum_index = N-1;
+	    int indexMin, temp;
 	    
-	    for(int l = 0; l <= N-1; l++) {
+	    for(int l = 0; l < N-1; l++) {
+	    	indexMin = l;
 	    	
-	    	
-	    	maxNum = numbers.get(0); // maxNum에 0번째 인덱스의 값 넣기
-	    	maxNum_index = 0; // maxNum의 인덱스는 0번째
-		    
-		    for(int j = 0 ; j <= last_index-1 ; j++) {
+		    for(int j = l+1 ; j < N; j++) {
 		    	
-		    	if(maxNum < numbers.get(j+1)) {
+		    	if(numbers.get(j) < numbers.get(indexMin)) {
 		    		
-		    		// 만약 maxNum의 숫자보다 더 큰 숫자가 있다면?
-		    		
-		    		maxNum = numbers.get(j+1);
-		    		// 그 숫자로 대체
-		    		maxNum_index = j+1;
-		    		// 그리고 걔의 인덱스도 함께 대체
+		    		// 만약 indexMin번째 숫자보다 더 작은 숫자가 있다면?
+		    		indexMin = j; // indexMin을 그 숫자로 대체
 		    	}
-		    	// 더 큰 숫자 없으면 안 대체
+		    	// 더 작은 숫자 없으면 안 대체
 		    	// j 하나 늘려서 다시 반복
 		    }
 		    
+		    temp = numbers.get(indexMin); 
+		    // 그렇게 찾은 가장 작은 숫자를 temp에 집어넣기
 		    
-		    numbers.set(maxNum_index, numbers.get(last_index));
-		    // 원래 최댓값이 있던 인덱스에 원래 맨 뒤에 있던 숫자를 집어넣기
-		    numbers.set(last_index, maxNum);
-		    // 그리고 맨 뒤 인덱스에 내가 찾은 최댓값을 집어넣기
+		    numbers.set(indexMin, numbers.get(l));
+		    // 가장 작은 숫자가 있던 자리에, 맨 앞에 있던 숫자 집어넣기
+		    numbers.set(l, temp);
+		    // 맨 앞에 가장 작은 숫자 집어넣기. 즉 가장 작은 숫자와 맨 앞 숫자를 swap
 		    
-		    last_index--;
-		    // 맨 뒤 인덱스에 최댓값 들어갔으니, 이제 그 앞부분에서 똑같은 행위 반복
+		    // 한번 최솟값 찾아서 맨 앞에 넣고 정렬 끝나면,
+		    // 이제 맨 앞의 숫자는 무시하고 그 다음 칸부터 다시 똑같이 정렬하기
+		    // 반복문 앞에서 자연스럽게 그 다음 칸으로 넘어가게 됨
+		    // 그래서 최댓값보다는 최솟값을 기준으로 정렬하는게 나음.
 	    }
 	    
 	    System.out.println(numbers.get(N/2));
