@@ -1,5 +1,9 @@
 package algorithm_practice;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Solution {
@@ -21,21 +25,20 @@ public class Solution {
 	    	int t_or_f = 1;
 	    	// 일단 회문 문자임을 가정하고 풀기 시작
 	    	
-	    	String[] alphabet = words[i].split("");
-	    	// 단어를 알파벳 단위로 쪼개 새로운 배열에 넣었음
+	    	List<String> alphabet = new ArrayList<>();
+	    	alphabet = Arrays.asList(words[i].split(""));
+	    	// 단어를 알파벳 단위로 쪼개 새로운 arraylist에 넣었음
 	    	
-	    	String[] reverse_alphabet = new String[alphabet.length];
-	    	// 거꾸로 배열을 새로 만들었음
+	    	List<String> reverse_alphabet = new ArrayList<>(alphabet);
+	    	// 거꾸로 list를 새로 만들고 원래 리스트를 복사했음
 	    	
-	    	for(int l = alphabet.length-1, m = 0; l >= 0; l--, m++) {
-	    		reverse_alphabet[m] = alphabet[l];
-	    		// 원래 배열의 순서를 뒤집어서 거꾸로 배열에 다시 넣었음
-	    	}
+	    	Collections.reverse(reverse_alphabet);
+	    	// 거꾸로 list에서는 배열을 뒤집었음
 	    	
-	    	for(int j = 0; j < alphabet.length/2; j++) {
+	    	for(int j = 0; j < alphabet.size()/2; j++) {
 	    		// 배열 길이가 홀수든 짝수든 2로 나눈 몫 만큼의 횟수로 비교하면 됨.
 	    		
-	    		if(!alphabet[j].equals(reverse_alphabet[j])) {
+	    		if(!alphabet.get(j).equals(reverse_alphabet.get(j))) {
 	    			t_or_f = 0;
 	    			break;
 	    			// 원래 배열과 거꾸로 배열의 문자를 앞에서부터 비교하다가
