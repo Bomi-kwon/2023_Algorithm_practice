@@ -24,13 +24,21 @@ public class Solution {
 	    	String[] alphabet = words[i].split("");
 	    	// 단어를 알파벳 단위로 쪼개 새로운 배열에 넣었음
 	    	
+	    	String[] reverse_alphabet = new String[alphabet.length];
+	    	// 거꾸로 배열을 새로 만들었음
+	    	
+	    	for(int l = alphabet.length-1, m = 0; l >= 0; l--, m++) {
+	    		reverse_alphabet[m] = alphabet[l];
+	    		// 원래 배열의 순서를 뒤집어서 거꾸로 배열에 다시 넣었음
+	    	}
+	    	
 	    	for(int j = 0; j < alphabet.length/2; j++) {
 	    		// 배열 길이가 홀수든 짝수든 2로 나눈 몫 만큼의 횟수로 비교하면 됨.
 	    		
-	    		if(!alphabet[j].equals(alphabet[alphabet.length-j-1])) {
+	    		if(!alphabet[j].equals(reverse_alphabet[j])) {
 	    			t_or_f = 0;
 	    			break;
-	    			// 만약 마주보는 문자 비교하다가
+	    			// 원래 배열과 거꾸로 배열의 문자를 앞에서부터 비교하다가
 	    			// 서로 다른 문자 나오면 회문이 아니라고 체크한 후 바로 반복문 탈출.
 	    		}
 	    		
