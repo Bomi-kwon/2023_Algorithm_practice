@@ -5,24 +5,42 @@ import java.util.Scanner;
 public class Solution {
 	public static void main(String[] args) {
 	    Scanner sc = new Scanner(System.in);
-	    int N = sc.nextInt();
+	    int T = sc.nextInt();
 	    
-	    for(int i = 0; i < N; i++) {
-	    	String word = sc.next();
-	    	// 한줄에 적히는 단어 인식하기
+	    for(int i = 0; i < T; i++) {
+	    	int N = sc.nextInt();
+	    	int[][] triangle = new int[N][N];
+	    	// 가로 N줄 세로 N줄인 정사각형 이차원 배열 만들기
 	    	
-	    	int t_or_f = 0;
-	    	// 일단 회문 문자가 아님을 가정하고 풀기 시작
+	    	System.out.println("#"+ (i+1) );
+	    	// 몇번째 테스트 케이스인지 쓰기 
+
+	    	for(int j = 0 ; j < N ; j++) {
+	    		triangle[j][0] = 1;
+	    		triangle[j][j] = 1;
+	    		// 맨 윗줄 숫자는 무조건 1
+	    		// 두번째 줄 숫자도 1 1
+	    		// 몇번째 줄이던 맨 앞과 맨 뒤는 무조건 1
+	    		
+	    		// 이제부턴 2번째 인덱스 줄부터 생각 (j번째 인덱스 줄이라고 생각)
+	    		for(int l = 1; l <= j-1; l++) {
+	    			triangle[j][l] = triangle[j-1][l-1] + triangle[j-1][l];
+	    			// j번째 줄의 l번째 값은 j-1번째 줄의 l-1번째값과 l번째 값의 합과 같음.
+	    		}
+	    	}
 	    	
-	    	if(word.equals(new StringBuilder(word).reverse().toString())) {
-	    		// word와 똑같은 문자열을 생성한뒤, 뒤집고 문자열로 생성
-	    		// 출력하거나 String 변수에 넣을땐 toString()을 붙여야 함.
-	    		t_or_f = 1;
-	    		// 뒤집었는데 원래랑 똑같으면 회문 문자가 맞다.
-	    	} 
-	    	
-	    	System.out.printf("#%d %d\n", i+1, t_or_f);
+	    	for(int m = 0 ; m < N ; m++) {
+	    		// m번째 줄이면 m+1개가 출력되야함
+	    		
+	    		for(int n = 0 ; n < m+1 ; n++) {
+	    			System.out.printf("%d ",triangle[m][n]);
+	    			// 숫자 적고 오른쪽 한칸 띄어쓰기
+	    		}
+	    		System.out.println("");
+	    		// 엔터 한번
+	    	}
 	    }
+	    
 	  }
 }
 
