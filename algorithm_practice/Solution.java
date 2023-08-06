@@ -27,20 +27,15 @@ public class Solution {
 	    			triangle[j][l] = triangle[j-1][l-1] + triangle[j-1][l];
 	    			// j번째 줄의 l번째 값은 j-1번째 줄의 l-1번째값과 l번째 값의 합과 같음.
 	    		}
-	    	}
-	    	
-	    	for(int m = 0 ; m < N ; m++) {
-	    		// m번째 줄이면 m+1개가 출력되야함
 	    		
-	    		for(int n = 0 ; n < m+1 ; n++) {
-	    			System.out.printf("%d ",triangle[m][n]);
+	    		for(int n = 0 ; n < j+1 ; n++) {
+	    			System.out.printf("%d ",triangle[j][n]);
 	    			// 숫자 적고 오른쪽 한칸 띄어쓰기
 	    		}
 	    		System.out.println("");
 	    		// 엔터 한번
 	    	}
 	    }
-	    
 	  }
 }
 
