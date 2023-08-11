@@ -20,45 +20,28 @@ public class Solution {
 	    			// 주어진 숫자들 2차원 배열에 넣기
 	    		}
 	    	}
-	    	
-	    	int[][] degree_90 = Rotation(cube);
-	    	int[][] degree_180 = Rotation(degree_90);
-	    	int[][] degree_270 = Rotation(degree_180);
 
 	    	System.out.printf("#%d\n",i+1);
 	    	// 몇번째 테스트 케이스인지 출력
 	    	
 	    	for(int row = 0 ; row < N ; row++) {
+	    		// 행과 열 자리를 바꾸고, 행이 원래와 순서가 거꾸로 가면 90도 회전한 것임
+	    		// 그 규칙만 계속 적용해주면 90도 -> 180도 -> 270도 회전 배열을 담지 않고 바로 출력할 수 있음
 	    		for(int column = 0 ; column < N ; column++) {
-	    			System.out.print(degree_90[row][column]);
+	    			System.out.print(cube[N-column-1][row]);
 	    		}
 	    		System.out.print(" ");
 	    		
 	    		for(int column = 0 ; column < N ; column++) {
-	    			System.out.print(degree_180[row][column]);
+	    			System.out.print(cube[N-row-1][N-column-1]);
 	    		}
 	    		System.out.print(" ");
 	    		
 	    		for(int column = 0 ; column < N ; column++) {
-	    			System.out.print(degree_270[row][column]);
+	    			System.out.print(cube[column][N-row-1]);
 	    		}
 	    		System.out.println();
 	    	}
-	    	
 	    }
 	  }
-
-	private static int[][] Rotation(int[][] cube) {
-		int[][] rotated_cube = new int[cube.length][cube.length];
-		
-		for(int row = 0 ; row < cube.length ; row++) {
-    		for(int column = 0 ; column < cube.length ; column++) {
-    			rotated_cube[row][column] = cube[cube.length-column-1][row];
-    			// 90도 회전하면?
-    			// 행과 열이 바뀌고 row는 숫자가 거꾸로 감소
-    		}
-    	}
-		
-		return rotated_cube;
-	}
 }
