@@ -28,10 +28,10 @@ public class Solution {
 					int how_much = sc.nextInt();
 					
 					if(p_or_m == 1) {
-						speed = speed + how_much;
+						speed += how_much;
 						// 가속이면 뒤 숫자만큼 속도 커짐
 					} else if(p_or_m == 2) {
-						speed = speed - how_much;
+						speed -= how_much;
 						// 감속이면 뒤 숫자만큼 속도 작아짐
 						if(speed < 0) {
 							// 그렇게 계산을 했는데 속도가 마이너스가 될 경우
@@ -41,12 +41,10 @@ public class Solution {
 					}
 				}
 				
-				distance = distance + speed;
+				distance += speed;
 				// 이전 command까지 이동했던 거리에 새롭게 이동한 거리 추가해주기
 				// 1초동안 이동하는 거라 speed가 곧 이동거리를 의미
-				
 			}
-			
 			System.out.printf("#%d %d\n", i+1, distance);
 		}
 	}
