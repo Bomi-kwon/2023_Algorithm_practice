@@ -14,10 +14,7 @@ public class Solution {
 	    	int[][] degree_90 = new int[N][N];
 	    	int[][] degree_180 = new int[N][N];
 	    	int[][] degree_270 = new int[N][N];
-	    	// 주어진 것과 돌릴 것들을 담을 2차원 배열 만들기
-	    	
-	    	String[][] print = new String[N][3];
-	    	// 출력을 위한 마지막 이차원 배열. 행은 여러개 열은 세개임!!
+	    	// 주어진 것과 돌릴 것들을 담을 2차원 배열 만들기 (다 정사각형 배열이고 숫자 들어감)
 	    	
 	    	for(int row = 0 ; row < N ; row++) {
 	    		// row번째 행
@@ -49,42 +46,28 @@ public class Solution {
 	    		}
 	    	}
 	    	
-    		for(int row = 0 ; row < N ; row++) {
-    			print[row][0] = "";
-    			for(int column = 0 ; column < N ; column++) {
-    				print[row][0] = print[row][0] + Integer.toString(degree_90[row][column]);
-    				// 90도 배열의 숫자를 한줄씩 이어붙여 출력 배열의 0번째 열에 집어넣기
-    			}
-    		}
-    		
-    		for(int row = 0 ; row < N ; row++) {
-    			print[row][1] = "";
-    			for(int column = 0 ; column < N ; column++) {
-    				print[row][1] = print[row][1] + Integer.toString(degree_180[row][column]);
-    				// 180도 배열의 숫자를 한줄씩 이어붙여 출력 배열의 1번째 열에 집어넣기
-    			}
-    		}
-    		
-    		for(int row = 0 ; row < N ; row++) {
-    			print[row][2] = "";
-    			for(int column = 0 ; column < N ; column++) {
-    				print[row][2] = print[row][2] + Integer.toString(degree_270[row][column]);
-    				// 270도 배열의 숫자를 한줄씩 이어붙여 출력 배열의 2번째 열에 집어넣기
-    			}
-    		}
 
 	    	System.out.printf("#%d\n",i+1);
 	    	// 몇번째 테스트 케이스인지 출력
 	    	
-    		for(int row = 0 ; row < N ; row++) {
-	    		for(int column = 0 ; column < 3 ; column++) {
-	    			System.out.printf("%s ", print[row][column]);
-	    			// 출력 배열 프린트
+	    	for(int row = 0 ; row < N ; row++) {
+	    		for(int column = 0 ; column < N ; column++) {
+	    			System.out.print(degree_90[row][column]);
 	    		}
-	    		System.out.println("");
+	    		System.out.print(" ");
+	    		
+	    		for(int column = 0 ; column < N ; column++) {
+	    			System.out.print(degree_180[row][column]);
+	    		}
+	    		System.out.print(" ");
+	    		
+	    		for(int column = 0 ; column < N ; column++) {
+	    			System.out.print(degree_270[row][column]);
+	    		}
+	    		System.out.println();
 	    	}
+	    	
 	    }
 	  }
 }
-
 
