@@ -4,44 +4,50 @@ import java.util.Scanner;
 
 public class Solution {
 	public static void main(String[] args) {
-	    Scanner sc = new Scanner(System.in);
-	    int T = sc.nextInt();
-	    // 테스트 케이스 갯수
-	    
-	    for(int i = 0; i < T; i++) {
-	    	int N = sc.nextInt();
-	    	int[][] cube = new int[N][N];
-	    	// 주어진 것을 담을 2차원 배열 만들기 (정사각형 배열이고 숫자 들어감)
-	    	
-	    	for(int row = 0 ; row < N ; row++) {
-	    		// row번째 행
-	    		for(int column = 0 ; column < N ; column++) {
-	    			cube[row][column] = sc.nextInt();
-	    			// 주어진 숫자들 2차원 배열에 넣기
-	    		}
-	    	}
-
-	    	System.out.printf("#%d\n",i+1);
-	    	// 몇번째 테스트 케이스인지 출력
-	    	
-	    	for(int row = 0 ; row < N ; row++) {
-	    		// 행과 열 자리를 바꾸고, 행이 원래와 순서가 거꾸로 가면 90도 회전한 것임
-	    		// 그 규칙만 계속 적용해주면 90도 -> 180도 -> 270도 회전 배열을 담지 않고 바로 출력할 수 있음
-	    		for(int column = 0 ; column < N ; column++) {
-	    			System.out.print(cube[N-column-1][row]);
-	    		}
-	    		System.out.print(" ");
-	    		
-	    		for(int column = 0 ; column < N ; column++) {
-	    			System.out.print(cube[N-row-1][N-column-1]);
-	    		}
-	    		System.out.print(" ");
-	    		
-	    		for(int column = 0 ; column < N ; column++) {
-	    			System.out.print(cube[column][N-row-1]);
-	    		}
-	    		System.out.println();
-	    	}
-	    }
-	  }
+		Scanner sc = new Scanner(System.in);
+		int T = sc.nextInt();
+		// 테스트 케이스는 총 T개 일 것이다.
+		
+		for(int i = 0; i < T; i++) {
+			int N = sc.nextInt();
+			// Command 갯수는 총 N개이다.
+			
+			int speed = 0;
+			// 초기 속도는 0이다.
+			
+			int distance = 0;
+			// 초기 이동거리도 0이다.
+			
+			for(int j = 0; j< N; j++) {
+				
+				int p_or_m = sc.nextInt();
+				// 가속인지 감속인지 구분
+				
+				if(p_or_m != 0) {
+					// 0이면 다음 숫자 없음. 가속/감속이면 얼만큼 할건지 뒤에 숫자 있음
+					int how_much = sc.nextInt();
+					
+					if(p_or_m == 1) {
+						speed = speed + how_much;
+						// 가속이면 뒤 숫자만큼 속도 커짐
+					} else if(p_or_m == 2) {
+						speed = speed - how_much;
+						// 감속이면 뒤 숫자만큼 속도 작아짐
+						if(speed < 0) {
+							// 그렇게 계산을 했는데 속도가 마이너스가 될 경우
+							// 그냥 속도 0으로 계산
+							speed = 0;
+						}
+					}
+				}
+				
+				distance = distance + speed;
+				// 이전 command까지 이동했던 거리에 새롭게 이동한 거리 추가해주기
+				// 1초동안 이동하는 거라 speed가 곧 이동거리를 의미
+				
+			}
+			
+			System.out.printf("#%d %d\n", i+1, distance);
+		}
+	}
 }
