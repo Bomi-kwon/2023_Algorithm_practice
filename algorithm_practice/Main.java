@@ -1,52 +1,48 @@
 package algorithm_practice;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
-	static int limit = 0;
-	static int N = 0;
-	static int maxWeight = 0;
+	static int maxScore = 0;
+	static int Num = 0;
+	static int Limit = 0;
 	
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
-	    limit = sc.nextInt();
-	    N = sc.nextInt();
+	    Num = sc.nextInt(); // 문제 갯수
+	    Limit = sc.nextInt(); // 제한 시간
 	    int sum = 0;
 	    
-	    List<Integer> weights = new ArrayList<>();
+	    int[][] question = new int[Num][2];
 	    
-	    for(int i = 0 ; i < N ; i++) {
-	    	weights.add(sc.nextInt());
-	    	// 숫자 N개 넣어주기
+	    for(int i = 0 ; i < Num ; i++) {
+	    	question[i][0] = sc.nextInt();
+	    	question[i][1] = sc.nextInt();
+	    	// 점수와 푸는데 걸리는 시간 넣어주기
 	    }
 	    
-	    Collections.sort(weights, Collections.reverseOrder());
-	    // 몸무게 무거운 순으로 (내림차순) 정렬
+	    DFS(0, 0, 0, question);
 	    
-	    DFS(0, sum, weights);
-	    
-    	System.out.println(maxWeight);
-	  }
+    	System.out.println(maxScore);
+	}
 
-	private static void DFS(int depth, int sum, List<Integer> weights) {
-		if(sum >= limit) {
+	private static void DFS(int depth, int totalScore, int totalTime, int[][] question) {
+		if(totalTime > Limit) {
 			return;
-			// 도중에 리밋을 넘어버리면 더이상 더할 필요조차 없음.
+			// 문제 푼 시간이 제한 시간 넘어가면 그대로 DFS 끝
 		}
 		
-		if(depth == N) {
-			// 모든 몸무게를 넣을지 말지 조합을 다 끝내면 이제 끝내면 됨
-			if(sum <= limit && maxWeight <= sum) {
-				maxWeight = sum;
-				// sum에서 큰 게 나올때마다 계속해서 몸무게 최댓값을 걔로 교체
+		if(depth == Num) {
+			if(totalTime <= Limit && totalScore > maxScore) {
+				maxScore = totalScore;
+				// 방금 푼 문제수가 많다면 걔로 값 교체
 			}
 		} else {
-			DFS(depth+1, sum + weights.get(depth), weights);
-			DFS(depth+1, sum, weights);
+			DFS(depth+1, totalScore+question[depth][0], totalTime + question[depth][1], question);
+			// 문제 푼 경우. 그럼 그 시간만큼 더해주기
+			DFS(depth+1, totalScore, totalTime, question);
+			// 문제 안 품. 그럼 시간 안 더해지고 깊이만 깊어짐.
 		}
 	}
 }
