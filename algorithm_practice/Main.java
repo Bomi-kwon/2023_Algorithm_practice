@@ -9,6 +9,8 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		int[] arr = new int[N];
+		int answer = 0;
+		int maxHeight = 0;
 		
 		for(int i = 0 ; i < N ; i++) {
 			arr[i] = sc.nextInt();
@@ -16,14 +18,15 @@ public class Main {
 		
 		for(int i = 0 ; i < N ; i++) {
 			if(i == 0) {
-				System.out.print(arr[i] + " ");
+				answer++;
+				maxHeight = arr[0];
 			} else {
-				if(arr[i-1] < arr[i]) {
-					System.out.print(arr[i] + " ");
+				if(maxHeight < arr[i]) {
+					answer++;
+					maxHeight = arr[i];
 				}
 			}
 		}
-		
-		
+		System.out.println(answer);
 	}
 }
