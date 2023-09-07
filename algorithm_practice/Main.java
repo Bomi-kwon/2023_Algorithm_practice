@@ -1,5 +1,8 @@
 package algorithm_practice;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Scanner;
 
 public class Main {
@@ -8,25 +11,23 @@ public class Main {
 		
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
-		int[] arr = new int[N];
-		int answer = 0;
-		int maxHeight = 0;
+		
+		List<Integer> num = new ArrayList<>();
 		
 		for(int i = 0 ; i < N ; i++) {
-			arr[i] = sc.nextInt();
+			num.add(sc.nextInt());
 		}
 		
-		for(int i = 0 ; i < N ; i++) {
-			if(i == 0) {
-				answer++;
-				maxHeight = arr[0];
-			} else {
-				if(maxHeight < arr[i]) {
-					answer++;
-					maxHeight = arr[i];
-				}
-			}
+		int M = sc.nextInt();
+		
+		for(int i = 0 ; i < M ; i++) {
+			num.add(sc.nextInt());
 		}
-		System.out.println(answer);
+		
+		Collections.sort(num); // 오름차순 정렬
+		
+		for(int x : num) {
+			System.out.print(x + " ");
+		}
 	}
 }
