@@ -9,43 +9,48 @@ public class Main {
 	public static void main(String[] args) {
 		
 		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
 		
-		List<Integer> num = new ArrayList<>();
+		int N = sc.nextInt();
+		int[] a = new int[N];
 		
 		for(int i = 0 ; i < N ; i++) {
-			num.add(sc.nextInt());
+			a[i] = sc.nextInt(); // a배열 따로
 		}
 		
 		int M = sc.nextInt();
+		int[] b = new int[M];
 		
 		for(int i = 0 ; i < M ; i++) {
-			num.add(sc.nextInt());
+			b[i] = sc.nextInt(); // b배열 따로
 		}
 		
-		// Collections.sort(num);
-		// 함수 사용하지 않고 오름차순 정렬해보기!!
+		int p1 = 0, p2 = 0; // 포인터 두개 만들어주기
+		// 포인터들은 각 배열의 인덱스를 가리킴.
+		List<Integer> answer = new ArrayList<>(); // 정답리스트
 		
-		int minNumIndex;
-		int box;
-		
-		for(int i = 0 ; i < N+M ; i++) {
-			minNumIndex = i;
-			// 일단 제일 앞 값이 최솟값이라고 하기
-			
-			for(int j = i ; j < N+M ; j++) {
-				if(num.get(j) < num.get(minNumIndex)) {
-					minNumIndex = j;
-					// 더 작은 숫자 나오면 걔로 대체
-				}
-			}
-			
-			box = num.get(i); // 제일 앞 값을 다른 곳으로 빼놓고
-			num.set(i, num.get(minNumIndex)); // 제일 앞에 최솟값 집어넣기
-			num.set(minNumIndex, box); // 최솟값 있던 곳에는 제일 앞값넣기
+		while(p1 < N && p2 < M) {
+			if(a[p1] < b[p2]) {
+				answer.add(a[p1]);
+				p1++;
+				// 위 두 줄은 answer.add(a[p1++])로 합칠수 있음.
+				// p1++은 p1값을 넣은 다음 1증가 시키겠다는 소리임.
+				// 후위연산임!!
+			} else {
+				answer.add(b[p2]);
+				p2++;
+			} // p1 == N이거나 p2 == M이면 둘중 한 배열을 다 쓴것!
+		}
+
+		while(p1 < N) {
+			answer.add(a[p1++]); // 여기선 합쳐서 써봤음
+			// 만약 a 배열이 아직 안 끝났으면 나머지 쭈루룩 다 넣기
+		}
+		while(p2 < M) {
+			answer.add(b[p2++]);
+			// 만약 b 배열이 아직 안 끝났으면 나머지 쭈루룩 다 넣기
 		}
 		
-		for(int x : num) {
+		for(int x : answer) {
 			System.out.print(x + " ");
 		}
 	}
